@@ -1,2 +1,2 @@
 # toyD3D
-Just a few file to play with D3D11
+Just a few files to play with D3D11
