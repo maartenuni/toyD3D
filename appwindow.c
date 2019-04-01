@@ -20,7 +20,7 @@ int WINAPI wWinMain(
     // Register the window class.
     const wchar_t CLASS_NAME[]  = L"Sample Window Class";
 
-    WNDCLASS wc = { };
+    WNDCLASS wc = {0};
 
     wc.lpfnWndProc   = WindowProc;
     wc.hInstance     = hInstance;
@@ -55,7 +55,7 @@ int WINAPI wWinMain(
 
     // Run the message loop.
 
-    MSG msg = { };
+    MSG msg = { 0 };
     while (GetMessage(&msg, NULL, 0, 0))
     {
         TranslateMessage(&msg);

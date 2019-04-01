@@ -16,7 +16,7 @@ void CleanD3D(void);
 void InitD3D(HWND hWnd)
 {
     // create a struct to hold information about the swap chain
-    DXGI_SWAP_CHAIN_DESC scd = { };
+    DXGI_SWAP_CHAIN_DESC scd = { 0 };
 
     // fill the swap chain description struct
     scd.BufferCount = 1;                                    // one back buffer
@@ -30,9 +30,9 @@ void InitD3D(HWND hWnd)
     D3D11CreateDeviceAndSwapChain(NULL,
                                   D3D_DRIVER_TYPE_HARDWARE,
                                   NULL,
+                                  0,
                                   NULL,
-                                  NULL,
-                                  NULL,
+                                  0,
                                   D3D11_SDK_VERSION,
                                   &scd,
                                   &swapchain,
@@ -45,7 +45,7 @@ void CleanD3D()
 {
     swapchain->lpVtbl->Release(swapchain);
     dev->lpVtbl->Release(dev);
-    devcon->lpVtbl->Release(devcon);
+    //devcon->lpVtbl->Release(devcon);
 }
 
 int WINAPI wWinMain(
@@ -60,7 +60,7 @@ int WINAPI wWinMain(
     // Register the window class.
     const wchar_t CLASS_NAME[]  = L"Sample Window Class";
 
-    WNDCLASS wc = { };
+    WNDCLASS wc = { 0 };
 
     wc.lpfnWndProc   = WindowProc;
     wc.hInstance     = hInstance;
@@ -95,7 +95,7 @@ int WINAPI wWinMain(
 
     // Run the message loop.
 
-    MSG msg = { };
+    MSG msg = {0};
     while (GetMessage(&msg, NULL, 0, 0))
     {
         TranslateMessage(&msg);
