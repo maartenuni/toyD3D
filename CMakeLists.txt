@@ -12,11 +12,32 @@ if (NOT MSVC)
     set(WINDOWS_LINK_OPTIONS -municode -mwindows)
 endif()
 
-target_link_options(msgbox PRIVATE ${WINDOWS_LINK_OPTIONS})
-target_link_options(appwin PRIVATE ${WINDOWS_LINK_OPTIONS})
-target_link_options(win3D PRIVATE ${WINDOWS_LINK_OPTIONS})
+if (MSVC)
+    target_compile_options(msgbox  PRIVATE /W4)
+    target_compile_options(appwin  PRIVATE /W4)
+    target_compile_options(win3D   PRIVATE "/W3")
+    target_compile_options(win3D++ PRIVATE /W4)
+else()
+    target_compile_options(msgbox  PRIVATE -Wall -pedantic)
+    target_compile_options(appwin  PRIVATE -Wall -pedantic)
+    target_compile_options(win3D   PRIVATE -Wall -pedantic)
+    target_compile_options(win3D++ PRIVATE -Wall -pedantic)
+endif()
+ 
+set_target_properties(
+        win3D
+    PROPERTIES 
+        C_STANDARD 11
+        C_STANDARD_REQUIRED TRUE
+    )
+
+
+
+target_link_options(msgbox  PRIVATE ${WINDOWS_LINK_OPTIONS})
+target_link_options(appwin  PRIVATE ${WINDOWS_LINK_OPTIONS})
+target_link_options(win3D   PRIVATE ${WINDOWS_LINK_OPTIONS})
 target_link_options(win3D++ PRIVATE ${WINDOWS_LINK_OPTIONS})
 
-target_link_libraries(win3D d3d11)
+target_link_libraries(win3D d3d11 dxguid)
 target_link_libraries(win3D++ d3d11)
 

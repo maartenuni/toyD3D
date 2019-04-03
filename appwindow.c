@@ -16,6 +16,7 @@ int WINAPI wWinMain(
     )
 {
     (void) unused;
+    (void) pCmdLine;
 
     // Register the window class.
     const wchar_t CLASS_NAME[]  = L"Sample Window Class";
